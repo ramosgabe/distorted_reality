@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    color: #00FF00;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px;
+    max-width: 90%;
+}
+
+h1, h2 {
+    font-size: clamp(14px, 2.5vw, 26px);
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.cursor {
+    display: inline-block; /* Ensures cursor aligns with text */
+    font-size: 1em;
+    animation: blink 1s infinite step-end;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.retro-btn {
+    display: none; /* Initially hidden */
+    background-color: #00FF00; /* Lime Green */
+    color: #000000; /* Deep Black */
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.retro-btn:hover {
+    background-color: #FF00FF; /* Bright Neon Pink */
+}
+
+.space-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+    display: none;
+    perspective: 500px; /* Provides a 3D space for children elements */
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: moveStar 5s linear infinite;
+    box-shadow: 0 0 5px #fff;
+}
+
+@keyframes moveStar {
+    0% {
+        transform: translateZ(-300px) scale(0.05); /* Start far away and small */
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateZ(0px) scale(2); /* Move closer and grow larger */
+        opacity: 0;
+    }
+}
+
+iframe {
+    border: none; /* Removes the default frame around iframes */
+}
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the items vertically */
+    justify-content: center; /* Center content horizontally */
+    width: 100%; /* Full width of the container */
+    max-width: 560px; /* Maximum width can match the video width */
+    margin: auto; /* Center the container on the page */
+}
+
+.button-container {
+    width: 100%; /* Take the full width of the parent container */
+    display: flex;
+    justify-content: space-between; /* Evenly space buttons within the container */
+    gap: 15px;
+    padding: 30px 20px; /* Add padding above and below the buttons */
+}
+
+.button-container button {
+    padding: 10px 20px; /* Padding inside the button for better touch area */
+    background-color: #00FF00; /* Example background color */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    color: #000000; /* Deep Black */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.button-container button:hover {
+    background-color: #FF00FF; /* Change background color on hover */
+}
+@media (max-width: 600px) {
+    .video-container {
+        width: 100%; /* Adjust width for smaller screens */
+    }
+
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        align-items: center; /* Center buttons */
+    }
+
+    .button-container button {
+        width: 80%; /* Make buttons wider on small screens */
+        margin-bottom: 10px; /* Add space between stacked buttons */
+    }
+}

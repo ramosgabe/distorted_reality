@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Shuffle</title>
+</head>
+<body>
+    <h1>Video Shuffle</h1>
+    <div id="video-container">
+        <iframe id="video-frame" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <button id="shuffle-button">Shuffle Video</button>
+
+    <script>
+        document.getElementById('shuffle-button').addEventListener('click', function() {
+            fetch('/shuffle')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('video-frame').src = data.url;
+                });
+        });
+    </script>
+</body>
+</html>
