@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuffle Video</title>
+    <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+    <div class="video-container">
+        <h1>Shuffled Video 3</h1>
+        <iframe id='ivplayer' width='640' height='360' src='' style='border:none;'></iframe>
+
+        <div class="button-container">
+ 
+        </div>
+        <a href="mod3_index.html">Back to Home</a> 
+    </div>
+    <script>
+        fetch('http://127.0.0.1:5000/shuffle')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ivplayer').src = data.url;
+            })
+            .catch(error => {
+                console.error('Error fetching the video URL:', error);
+            });
+    </script>
+</body>
+</html>

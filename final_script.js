@@ -1,8 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     const text1 = document.querySelector('#text1');
     const text2 = document.querySelector('#text2');
+    const text3 = document.querySelector('#text3');
+    const text4 = document.querySelector('#text4');
+    const text5 = document.querySelector('#text5');
+    const text6 = document.querySelector('#text6');
+    const text7 = document.querySelector('#text7');
+    const text8 = document.querySelector('#text8');
     const cursor1 = document.querySelector('#cursor1');
     const cursor2 = document.querySelector('#cursor2');
+    const orText = document.querySelector('#or-text');
+    const shuffleButton = document.querySelector('#shuffle');
+    const currentPage = window.location.pathname;
+
 
     function hideAllCursors() {
         cursor1.style.display = 'none';
@@ -32,22 +42,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function startLine2() {
-        showCursor(cursor2);
-        typeWriter('What would you like to watch today?', 0, text2, cursor2, fadeInButtons, cursor2);
-    }
-
-    hideAllCursors();
-    showCursor(cursor1);
-    typeWriter('Hello there!', 0, text1, cursor1, startLine2);
-
     function fadeInButtons() {
-        const buttons = document.querySelectorAll('.retro-btn');
+        const buttons = document.querySelectorAll('.retro-btn:not(.fade-in)');
         buttons.forEach(btn => {
             btn.style.display = 'inline-block';
+            btn.style.transition = 'opacity 1s ease-in-out';
             setTimeout(() => {
                 btn.style.opacity = 1;
-            }, 100);
+            }, 100); // A small delay to ensure the transition effect
+        });
+
+        // Fade in "OR" text after all buttons are shown
+        setTimeout(() => {
+            orText.style.display = 'block';
+            orText.style.transition = 'opacity 1s ease-in-out';
+            orText.style.opacity = 1;
+        }, 1000); // Adjust this timing as needed
+    
+        // Fade in the shuffle button after the "OR" text
+        setTimeout(() => {
+            shuffleButton.style.display = 'inline-block';
+            shuffleButton.style.transition = 'opacity 1s ease-in-out';
+            shuffleButton.style.opacity = 1;
+            shuffleButton.classList.add('slow-spin');
+        }, 2000);
+
+        buttons.forEach(btn => {
             btn.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the default action
                 handleStarfieldTransition(this.id);
@@ -55,15 +75,64 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function startLine2() {
+        showCursor(cursor2);
+        typeWriter('What would you like to watch today?', 0, text2, cursor2, fadeInButtons, cursor2);
+    }
+    
+    function startLine3() {
+        showCursor(cursor2);
+        typeWriter("Here's what you're watching today.", 0, text4, cursor2, fadeInButtons, cursor2);
+    }
+    
+    function startLine4() {
+        showCursor(cursor2);
+        typeWriter("Here are some recommendations...", 0, text6, cursor2, fadeInButtons, cursor2);
+    }
+
+    function startLine5() {
+        showCursor(cursor2);
+        typeWriter("Here's Some more you might like...", 0, text8, cursor2, fadeInButtons, cursor2);
+    }
+    
+
+    hideAllCursors();
+    
+    console.log(currentPage)
+
+    if (currentPage.endsWith('/')) {
+        showCursor(cursor1);
+        typeWriter('Hello there!', 0, text1, cursor1, startLine2);
+    } 
+    else if (currentPage.endsWith('mod2_index.html')) {
+        showCursor(cursor1);
+        typeWriter('enjoying yourself I see.', 0, text7, cursor1, startLine5);
+    } 
+    else if (currentPage.endsWith('mod1_index.html')) {
+        showCursor(cursor1);
+        typeWriter('Hey, Welcome Back!', 0, text3, cursor1, startLine4);
+    } 
+    else if (currentPage.endsWith('mod3_index.html')) {
+        showCursor(cursor1);
+        typeWriter('hi, again.', 0, text5, cursor1, startLine3);
+    }
+    else if (currentPage.endsWith('index.html')) {
+        showCursor(cursor1);
+        typeWriter('Hello there!', 0, text1, cursor1, startLine2);
+    }
     function handleStarfieldTransition(videoId) {
         let spaceOverlay = createStarfield();
         document.body.appendChild(spaceOverlay);
         spaceOverlay.style.display = 'block';
 
         setTimeout(() => {
-            window.location.href = videoId + '.html'; // Redirect to the video page
+            if (videoId === 'shuffle') {
+                shuffleVideo();
+            } else {
+                window.location.href = videoId + '.html'; // Redirect to the video page
+            }
             document.body.removeChild(spaceOverlay); // Clean up overlay after redirect
-        }, 5200); // Set this to your longest animation duration
+        }, 5000); // Set this to your longest animation duration
     }
 
     function createStarfield() {
@@ -83,7 +152,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         return spaceOverlay;
-    }    
+    }
 
-    // fadeInButtons(); // Activate buttons with star transition
+    function shuffleVideo() {
+        const pages = ['shuffle1.html', 'shuffle2.html', 'shuffle3.html'];
+        let currentIndex = localStorage.getItem('shuffleIndex');
+        currentIndex = currentIndex ? parseInt(currentIndex) : 0;
+
+        const nextIndex = (currentIndex + 1) % pages.length;
+        localStorage.setItem('shuffleIndex', nextIndex);
+
+        window.location.href = pages[currentIndex];
+    }
+
+    document.getElementById('shuffle').addEventListener('click', function() {
+        handleStarfieldTransition('shuffle');
+    });
 });

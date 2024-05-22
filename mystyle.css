@@ -147,3 +147,41 @@ iframe {
         margin-bottom: 10px; /* Add space between stacked buttons */
     }
 }
+.fade-in {
+    display: none; /* Initially hidden */
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+@keyframes spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.spin {
+    animation: spin 2s infinite; /* Adjust the duration and repetition as needed */
+}
+@keyframes slow-spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+    }
+    20%, 22%, 24%, 55% {
+        opacity: 0;
+    }
+}
+
+.slow-spin {
+    animation: slow-spin 5s linear infinite, flicker 1s infinite;
+}

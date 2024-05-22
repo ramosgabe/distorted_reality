@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuffle Video</title>
+    <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+    <div class="video-container">
+        <h1>Shuffled Video</h1>
+        <iframe id='ivplayer' width='640' height='360' src='' style='border:none;'></iframe>
+
+        <div class="button-container">
+ 
+        </div>
+        <a href="index.html">Back to Home</a> 
+    </div>
+    <script>
+        // Function to get URL parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Set the iframe source to the video URL from query parameter
+        document.getElementById('ivplayer').src = getQueryParam('video');
+    </script>
+</body>
+</html>
