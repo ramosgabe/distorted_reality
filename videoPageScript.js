@@ -40,5 +40,19 @@ document.addEventListener('DOMContentLoaded', function() {
         return spaceOverlay;
     }
 
+    function showSpecialButton() {
+        const specialButton = document.getElementById('no_control');
+        specialButton.style.display = 'inline-block';
+        setTimeout(() => {
+            specialButton.style.opacity = 1;
+        }, 10); // Small delay for transition effect
+        specialButton.addEventListener('click', function() {
+            window.location.href = 'no_control.html'; // Redirect to another_page.html when clicked
+        });
+    }
+
     handleButtonClicks(); // Initialize button click listeners
+
+    // Show the special button after 20 seconds
+    setTimeout(showSpecialButton, 20000);
 });

@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function startLine3() {
         showCursor(cursor2);
-        typeWriter("Here's what you're watching today.", 0, text4, cursor2, fadeInButtons, cursor2);
+        typeWriter("Here's what you're watching next.", 0, text4, cursor2, fadeInButtons, cursor2);
     }
     
     function startLine4() {

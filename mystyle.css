@@ -150,7 +150,7 @@ iframe {
 .fade-in {
     display: none; /* Initially hidden */
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 1s ease-in-out;
 }
 @keyframes spin {
     0% {
@@ -184,4 +184,28 @@ iframe {
 
 .slow-spin {
     animation: slow-spin 5s linear infinite, flicker 1s infinite;
+}
+
+.special_button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    width: 100%; /* Full width of the container */
+    padding: 30px 20px; 
+}
+
+.special_button-container button {
+    padding: 10px 20px; /* Padding inside the button for better touch area */
+    background-color: #00FF00; /* Example background color */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    color: #000000; /* Deep Black */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.special_button-container button:hover {
+    background-color: #FF00FF; 
 }
