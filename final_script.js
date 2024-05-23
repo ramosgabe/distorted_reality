@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cursor1 = document.querySelector('#cursor1');
     const cursor2 = document.querySelector('#cursor2');
     const orText = document.querySelector('#or-text');
-    const shuffleButton = document.querySelector('#shuffle');
+    const shuffleButtons = document.querySelectorAll('#shuffle1, #shuffle2, #shuffle3');
     const currentPage = window.location.pathname;
 
 
@@ -61,10 +61,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
         // Fade in the shuffle button after the "OR" text
         setTimeout(() => {
-            shuffleButton.style.display = 'inline-block';
-            shuffleButton.style.transition = 'opacity 1s ease-in-out';
-            shuffleButton.style.opacity = 1;
-            shuffleButton.classList.add('slow-spin');
+            shuffleButtons.forEach(btn => {
+                btn.style.display = 'inline-block';
+                btn.style.transition = 'opacity 1s ease-in-out';
+                btn.style.opacity = 1;
+                btn.classList.add('slow-spin');
+            });
         }, 2000);
 
         buttons.forEach(btn => {
@@ -153,19 +155,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
         return spaceOverlay;
     }
+    
 
-    function shuffleVideo() {
-        const pages = ['shuffle1.html', 'shuffle2.html', 'shuffle3.html'];
-        let currentIndex = localStorage.getItem('shuffleIndex');
-        currentIndex = currentIndex ? parseInt(currentIndex) : 0;
-
-        const nextIndex = (currentIndex + 1) % pages.length;
-        localStorage.setItem('shuffleIndex', nextIndex);
-
-        window.location.href = pages[currentIndex];
-    }
-
-    document.getElementById('shuffle').addEventListener('click', function() {
-        handleStarfieldTransition('shuffle');
+    shuffleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            handleStarfieldTransition(this.id);
+        });
     });
+
 });

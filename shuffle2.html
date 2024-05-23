@@ -9,7 +9,7 @@
 <body>
     <div class="video-container">
         <h1>Shuffled Video</h1>
-        <iframe id='ivplayer' width='640' height='360' src='' style='border:none;'></iframe>
+        <iframe id='ivplayer1' width='640' height='360' src='' style='border:none;'></iframe>
 
         <div class="button-container">
  
@@ -17,14 +17,41 @@
         <a href="mod2_index.html">Back to Home</a> 
     </div>
     <script>
-        fetch('http://127.0.0.1:5000/shuffle')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('ivplayer').src = data.url;
-            })
-            .catch(error => {
-                console.error('Error fetching the video URL:', error);
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            const embedLinks = [
+            "https://www.youtube.com/embed/vtkGtXtDlQA?si=ZRDP9jUog2IcgQi8;",
+            "https://www.youtube.com/embed/G9FGgwCQ22w?si=WWRsQo3l9pzENQzt;",
+            "https://www.youtube.com/embed/LZgeIReY04c?si=mJYHX6NnmABIT9dQ;",
+            "https://yewtu.be/embed/Osqf4oIK0E8?t=7",
+            "https://www.youtube.com/embed/nyem3gD6XN8?si=pIxGfL1OxiIoWN9p;",
+            "https://yewtu.be/embed/24zhk_IqfbI?t=4",
+            "https://yewtu.be/embed/_hI0qMtdfng?t=4",
+            "https://www.youtube.com/embed/qX6NztnPU-4?si=HUajjICMA0EkCQuv&amp",
+            "https://www.youtube.com/embed/d2WLAMurMzU?si=qgN5qQcqZcHgj0DX",
+            "https://www.youtube.com/embed/eOvHZDGK-kY?si=49Ln3LXttR742UY7",
+            "https://www.youtube.com/embed/JLmOkEEC9SQ?si=fFZLmwiQ10Z4-N2J",
+            "https://www.youtube.com/embed/hqZoK1bq2hs?si=10NkafRYAtgLcPFo",
+            "https://www.youtube.com/embed/3AbU_CnkBiE?si=waNX3_qepEQsd6PB",
+            "https://www.youtube.com/embed/YDXOioU_OKM?si=uuo4AIsgO_Ojp-Vj",
+            "https://www.youtube.com/embed/oo3qWms05_s?si=YuKu9Rde-RyC9K52",
+            "https://www.youtube.com/embed/IVGCBkBX2nk?si=6FC23tITsDEfz4Iu",
+            "https://www.youtube.com/embed/AfgL9Y1O1ko?si=SfhOwITL1u50eZQd",
+            "https://www.youtube.com/embed/u08E7c-FRbU?si=U9QU3Si4fulGtZnK"
+                ];
+
+            function shuffleVideo() {
+                const randomIndex = Math.floor(Math.random() * embedLinks.length);
+                const randomUrl = embedLinks[randomIndex];
+                const iframe = document.getElementById('ivplayer1');
+                if (iframe) {
+                    iframe.src = randomUrl;
+                } else {
+                    console.error("iframe element not found");
+                }
+            }
+
+            shuffleVideo(); // Call the function to set the iframe src when the page loads
+        });
     </script>
 </body>
 </html>
